@@ -1,11 +1,15 @@
+import 'package:currency_exchanger/core/errors/exceptions.dart';
 import 'package:currency_exchanger/core/utils/typedefs.dart';
+import 'package:currency_exchanger/features/home/data/model/current_exchange_model.dart';
+import 'package:currency_exchanger/features/home/data/model/daily_exchange_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<DataMap> getCurrentExchangeRate({required String toSymbol});
+  Future<CurrentExchangeModel> getCurrentExchangeRate(
+      {required String toSymbol});
 
-  Future<DataMap> getDailyExchangeRate({required String toSymbol});
+  Future<DailyExchangeModel> getDailyExchangeRate({required String toSymbol});
 }
 
 const kGetCurrentExchangeRate = '/get/open/currentExchangeRate';
@@ -17,7 +21,9 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   final Dio _client;
 
   @override
-  Future<DataMap> getCurrentExchangeRate({required String toSymbol}) async {
+  Future<CurrentExchangeModel> getCurrentExchangeRate({
+    required String toSymbol,
+  }) async {
     try {
       final response = await _client.get<DataMap>(
         kGetCurrentExchangeRate,
@@ -27,14 +33,23 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           'to_symbol': toSymbol,
         },
       );
-      return response.data!;
+      if (response.statusCode != 200 || response.statusCode != 201) {
+        return CurrentExchangeModel.fromMap(response.data!);
+      } else {
+        throw APIException(
+          message: response.statusMessage!,
+          statusCode: response.statusCode!,
+        );
+      }
     } catch (e) {
       throw Exception('Failed to get current exchange rate: $e');
     }
   }
 
   @override
-  Future<DataMap> getDailyExchangeRate({required String toSymbol}) async {
+  Future<DailyExchangeModel> getDailyExchangeRate({
+    required String toSymbol,
+  }) async {
     try {
       final response = await _client.get<DataMap>(
         kGetDailyExchangeRate,
@@ -44,7 +59,14 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           'to_symbol': toSymbol,
         },
       );
-      return response.data!;
+      if (response.statusCode != 200 || response.statusCode != 201) {
+        return DailyExchangeModel.fromMap(response.data!);
+      } else {
+        throw APIException(
+          message: response.statusMessage!,
+          statusCode: response.statusCode!,
+        );
+      }
     } catch (e) {
       throw Exception('Failed to get daily exchange rate: $e');
     }
