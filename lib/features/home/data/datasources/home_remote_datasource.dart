@@ -6,14 +6,15 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<CurrentExchangeModel> getCurrentExchangeRate(
-      {required String toSymbol});
+  Future<CurrentExchangeModel> getCurrentExchangeRate({
+    required String toSymbol,
+  });
 
   Future<DailyExchangeModel> getDailyExchangeRate({required String toSymbol});
 }
 
-const kGetCurrentExchangeRate = '/get/open/currentExchangeRate';
-const kGetDailyExchangeRate = '/get/open/dailyExchangeRate';
+const kGetCurrentExchangeRate = 'open/currentExchangeRate';
+const kGetDailyExchangeRate = 'open/dailyExchangeRate';
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   const HomeRemoteDataSourceImpl(this._client);
@@ -33,16 +34,23 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           'to_symbol': toSymbol,
         },
       );
-      if (response.statusCode != 200 || response.statusCode != 201) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return CurrentExchangeModel.fromMap(response.data!);
       } else {
         throw APIException(
-          message: response.statusMessage!,
-          statusCode: response.statusCode!,
+          message: response.statusMessage ?? 'Unknown error',
+          statusCode: response.statusCode ?? 0,
         );
       }
     } catch (e) {
-      throw Exception('Failed to get current exchange rate: $e');
+      if (e is DioException && e.response != null) {
+        throw APIException(
+          message: e.response?.statusMessage ?? 'Unknown error',
+          statusCode: e.response?.statusCode ?? 0,
+        );
+      } else {
+        throw Exception('Unexpected error: $e');
+      }
     }
   }
 
@@ -59,16 +67,23 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           'to_symbol': toSymbol,
         },
       );
-      if (response.statusCode != 200 || response.statusCode != 201) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return DailyExchangeModel.fromMap(response.data!);
       } else {
         throw APIException(
-          message: response.statusMessage!,
-          statusCode: response.statusCode!,
+          message: response.statusMessage ?? 'Unknown error',
+          statusCode: response.statusCode ?? 0,
         );
       }
     } catch (e) {
-      throw Exception('Failed to get daily exchange rate: $e');
+      if (e is DioException && e.response != null) {
+        throw APIException(
+          message: e.response?.statusMessage ?? 'Unknown error',
+          statusCode: e.response?.statusCode ?? 0,
+        );
+      } else {
+        throw Exception('Unexpected error: $e');
+      }
     }
   }
 }

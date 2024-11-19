@@ -1,3 +1,4 @@
+import 'package:currency_exchanger/core/utils/typedefs.dart';
 import 'package:currency_exchanger/features/home/domain/entities/data.dart';
 
 class DataModel extends Data {
@@ -9,7 +10,7 @@ class DataModel extends Data {
     super.date,
   });
 
-  DataModel.fromJson(Map<String, dynamic> json)
+  DataModel.fromJson(DataMap json)
       : super(
           open: json['open'] as double,
           high: json['high'] as double,

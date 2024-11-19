@@ -19,8 +19,8 @@ Future<void> init() async {
       final dio = Dio(
         BaseOptions(
           baseUrl: ApiConfig.BASE_URL,
-          connectTimeout: const Duration(seconds: 10),
-          receiveTimeout: const Duration(seconds: 10),
+          connectTimeout: const Duration(milliseconds: 5000),
+          receiveTimeout: const Duration(milliseconds: 3000),
           headers: {
             'Content-Type': 'application/json',
           },

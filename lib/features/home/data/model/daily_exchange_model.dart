@@ -27,7 +27,7 @@ class DailyExchangeModel extends DailyExchange {
           to: json['to'] as String,
           lastUpdatedAt: json['lastUpdatedAt'] as String,
           data: (json['data'] as List<dynamic>?)
-              ?.map((item) => DataModel.fromJson(item as Map<String, dynamic>))
+              ?.map((item) => DataModel.fromJson(item as DataMap))
               .toList(),
         );
 }

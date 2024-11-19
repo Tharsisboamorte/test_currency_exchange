@@ -43,4 +43,4 @@ app.*.map.json
 /android/app/release
 
 #Obfuscating sensitive data
-.env
+*.env
