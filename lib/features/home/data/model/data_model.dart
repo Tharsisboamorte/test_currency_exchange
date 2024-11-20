@@ -10,6 +10,14 @@ class DataModel extends Data {
     super.date,
   });
 
+  const DataModel.empty() : this(
+    close: 0,
+    date: '',
+    high: 0,
+    low: 0,
+    open: 0,
+  );
+
   DataModel.fromJson(DataMap json)
       : super(
           open: json['open'] as double,

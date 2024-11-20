@@ -40,7 +40,7 @@ class DailyExchangeCard extends StatelessWidget {
         children: [
           Text(
             date,
-            style: AppTextStyles.dateStyle,
+            style: AppTextStyles.paragraphMediumBold,
           ),
           const SizedBox(height: 8),
           Row(
@@ -95,9 +95,11 @@ class DailyExchangeCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 4),
                   Icon(
-                    closeDiff > 0 ? Icons.arrow_upward : Icons.arrow_downward,
+                    closeDiff > 0
+                        ? Icons.keyboard_arrow_up_outlined
+                        : Icons.keyboard_arrow_down_outlined,
                     color: closeDiff > 0 ? Colors.green : Colors.red,
-                    size: 16,
+                    size: 24,
                   ),
                 ],
               ),
@@ -114,12 +116,12 @@ Widget _buildLabelValuePair(String label, String value) {
     children: [
       Text(
         label,
-        style: AppTextStyles.labelStyle,
+        style: AppTextStyles.tableHeader,
       ),
       const SizedBox(width: 4),
       Text(
         value,
-        style: AppTextStyles.valueStyle,
+        style: AppTextStyles.paragraphDefaultBold,
       ),
     ],
   );

@@ -1,6 +1,11 @@
 import 'package:currency_exchanger/core/services/logging_interceptor.dart';
 import 'package:currency_exchanger/core/utils/constants.dart';
 import 'package:currency_exchanger/features/home/data/datasources/home_remote_datasource.dart';
+import 'package:currency_exchanger/features/home/data/repositories/home_repository_impl.dart';
+import 'package:currency_exchanger/features/home/domain/repositories/home_repository.dart';
+import 'package:currency_exchanger/features/home/domain/usecases/get_current_exchange.dart';
+import 'package:currency_exchanger/features/home/domain/usecases/get_daily_exchange.dart';
+import 'package:currency_exchanger/features/home/presentation/cubit/home_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -14,7 +19,22 @@ Future<void> init() async {
       () => HomeRemoteDataSourceImpl(sl<Dio>()),
     )
 
-    //HTTP REQUESTS
+    //Repositories
+    ..registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(sl()))
+
+    //App Logic
+    ..registerFactory(
+      () => HomeCubit(
+        getCurrentExchange: sl(),
+        getDailyExchange: sl(),
+      ),
+    )
+
+    //UseCases
+    ..registerLazySingleton(() => GetCurrentExchange(sl()))
+    ..registerLazySingleton(() => GetDailyExchange(sl()))
+
+    //external dependencies
     ..registerLazySingleton<Dio>(() {
       final dio = Dio(
         BaseOptions(
@@ -33,5 +53,4 @@ Future<void> init() async {
 
       return dio;
     });
-
 }

@@ -1,6 +1,8 @@
 import 'package:currency_exchanger/core/theme/text_styles.dart';
 import 'package:currency_exchanger/core/utils/app_strings.dart';
+import 'package:currency_exchanger/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExchangeRateNowWidget extends StatelessWidget {
   const ExchangeRateNowWidget({
@@ -8,38 +10,46 @@ class ExchangeRateNowWidget extends StatelessWidget {
     required this.toSymbol,
     required this.dateTime,
     required this.exchangeRate,
-    required this.currencySymbol,
     super.key,
   });
 
   final String fromSymbol;
   final String toSymbol;
   final String dateTime;
-  final String currencySymbol;
-  final String exchangeRate;
+  final double exchangeRate;
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<HomeCubit>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              AppStrings.exchangeRateNow,
-              style: AppTextStyles.dateStyle.copyWith(color: Colors.black),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  AppStrings.exchangeRateNow,
+                  style: AppTextStyles.paragraphLargeBold.copyWith(
+                    color: Colors.black,
+                    fontSize: 18,
+                  ),
+                ),
+                Text(
+                  dateTime,
+                  style: AppTextStyles.paragraphMedium.copyWith(
+                    color: Colors.blueGrey,
+                  ),
+                ),
+              ],
             ),
             Text(
               '$toSymbol/$fromSymbol',
-              style: AppTextStyles.dateStyle,
+              style: AppTextStyles.titleAdminH1.copyWith(fontSize: 24),
             ),
           ],
-        ),
-        const SizedBox(height: 4),
-        Text(
-          dateTime,
-          style: AppTextStyles.valueStyle.copyWith(color: Colors.grey),
         ),
         const SizedBox(height: 12),
         Container(
@@ -50,8 +60,8 @@ class ExchangeRateNowWidget extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              '$currencySymbol $exchangeRate',
-              style: AppTextStyles.exchangeRateStyle,
+              'R\$ ${cubit.formatCurrentCurrency(exchangeRate)}',
+              style: AppTextStyles.dashboardBigNumber,
             ),
           ),
         ),
