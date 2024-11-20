@@ -1,6 +1,6 @@
 import 'package:currency_exchanger/core/extension/context_extension.dart';
-import 'package:currency_exchanger/core/theme/colors.dart';
-import 'package:currency_exchanger/core/theme/text_styles.dart';
+import 'package:currency_exchanger/core/res/colors.dart';
+import 'package:currency_exchanger/core/res/text_styles.dart';
 import 'package:currency_exchanger/core/utils/app_strings.dart';
 import 'package:currency_exchanger/core/utils/logger.dart';
 import 'package:currency_exchanger/features/home/domain/entities/daily_exchange.dart';

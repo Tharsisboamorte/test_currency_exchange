@@ -1,7 +1,7 @@
 import 'package:currency_exchanger/core/extension/context_extension.dart';
-import 'package:currency_exchanger/core/theme/colors.dart';
-import 'package:currency_exchanger/core/theme/media_res.dart';
-import 'package:currency_exchanger/core/theme/text_styles.dart';
+import 'package:currency_exchanger/core/res/colors.dart';
+import 'package:currency_exchanger/core/res/media_res.dart';
+import 'package:currency_exchanger/core/res/text_styles.dart';
 import 'package:currency_exchanger/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,6 +28,7 @@ class AppTitleView extends StatelessWidget {
         Text(
           AppStrings.appTitle,
           style: AppTextStyles.paragraphMedium.copyWith(
+            color: AppColors.branded,
             fontSize: 24,
             fontWeight: FontWeight.w700,
           ),

@@ -1,5 +1,5 @@
 import 'package:currency_exchanger/core/extension/context_extension.dart';
-import 'package:currency_exchanger/core/theme/colors.dart';
+import 'package:currency_exchanger/core/res/colors.dart';
 import 'package:currency_exchanger/features/home/presentation/cubit/home_cubit.dart';
 import 'package:currency_exchanger/features/home/presentation/widgets/app_title_view.dart';
 import 'package:currency_exchanger/features/home/presentation/widgets/currency_text_field.dart';
@@ -18,12 +18,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<HomeCubit>();
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
-        //Add Error listeners
+        if (state is ErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.message)),
+          );
+        }
       },
       builder: (context, state) {
-        final cubit = context.read<HomeCubit>();
         return Scaffold(
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
@@ -40,9 +44,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   DefaultElevatedButton(
                     currencyController: cubit.currencyTextController,
                     onPressedButton: () {
-                      cubit.getCurrencyExchange(
-                        cubit.currencyTextController.text,
-                      );
+                      final isCurrencyValid = context
+                          .read<HomeCubit>()
+                          .isCurrencyValid(cubit.currencyTextController.text);
+
+                      if (isCurrencyValid == true) {
+                        cubit.getCurrencyExchange(
+                          cubit.currencyTextController.text.toUpperCase(),
+                        );
+                      }
                     },
                   ),
                   if (state is CurrencyDataLoaded)
@@ -51,14 +61,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       dailyExchangeData: state.dailyExchanges,
                     )
                   else
-                    state is HomeInitial
-                        ? const SizedBox()
-                        : const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: CircularProgressIndicator(
+                    state is GettingCurrencyData
+                        ? const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: CircularProgressIndicator(
                               color: AppColors.branded,
                             ),
-                        ),
+                          )
+                        : const SizedBox(),
                 ],
               ),
             ),

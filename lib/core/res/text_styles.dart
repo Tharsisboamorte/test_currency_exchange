@@ -1,11 +1,13 @@
-import 'package:currency_exchanger/core/theme/Fonts.dart';
+import 'package:currency_exchanger/core/res/Fonts.dart';
+import 'package:currency_exchanger/core/res/colors.dart';
 import 'package:flutter/material.dart';
 
 class AppTextStyles {
   static const TextStyle tableHeader = TextStyle(
     fontFamily: Fonts.roboto,
     fontSize: 11,
-    fontWeight: FontWeight.w500,
+    color: AppColors.neutralDark,
+    fontWeight: FontWeight.w600,
     height: 14 / 11,
     textBaseline: TextBaseline.alphabetic,
   );

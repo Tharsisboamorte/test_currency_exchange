@@ -1,4 +1,5 @@
-import 'package:currency_exchanger/core/theme/text_styles.dart';
+import 'package:currency_exchanger/core/res/colors.dart';
+import 'package:currency_exchanger/core/res/text_styles.dart';
 import 'package:currency_exchanger/core/utils/app_strings.dart';
 import 'package:currency_exchanger/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
@@ -39,15 +40,16 @@ class ExchangeRateNowWidget extends StatelessWidget {
                 ),
                 Text(
                   dateTime,
-                  style: AppTextStyles.paragraphMedium.copyWith(
-                    color: Colors.blueGrey,
-                  ),
+                  style: AppTextStyles.paragraphMedium,
                 ),
               ],
             ),
             Text(
               '$toSymbol/$fromSymbol',
-              style: AppTextStyles.titleAdminH1.copyWith(fontSize: 24),
+              style: AppTextStyles.titleAdminH1.copyWith(
+                fontSize: 24,
+                color: AppColors.branded,
+              ),
             ),
           ],
         ),
@@ -61,7 +63,9 @@ class ExchangeRateNowWidget extends StatelessWidget {
           child: Center(
             child: Text(
               'R\$ ${cubit.formatCurrentCurrency(exchangeRate)}',
-              style: AppTextStyles.dashboardBigNumber,
+              style: AppTextStyles.dashboardBigNumber.copyWith(
+                color: AppColors.branded,
+              ),
             ),
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:currency_exchanger/core/extension/context_extension.dart';
-import 'package:currency_exchanger/core/theme/colors.dart';
+import 'package:currency_exchanger/core/res/colors.dart';
 import 'package:currency_exchanger/features/home/domain/entities/current_exchange.dart';
 import 'package:currency_exchanger/features/home/domain/entities/daily_exchange.dart';
 import 'package:currency_exchanger/features/home/presentation/cubit/home_cubit.dart';

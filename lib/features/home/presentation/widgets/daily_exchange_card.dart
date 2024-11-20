@@ -1,4 +1,5 @@
-import 'package:currency_exchanger/core/theme/text_styles.dart';
+import 'package:currency_exchanger/core/res/colors.dart';
+import 'package:currency_exchanger/core/res/text_styles.dart';
 import 'package:currency_exchanger/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,9 @@ class DailyExchangeCard extends StatelessWidget {
         children: [
           Text(
             date,
-            style: AppTextStyles.paragraphMediumBold,
+            style: AppTextStyles.paragraphMediumBold.copyWith(
+              color: AppColors.branded,
+            ),
           ),
           const SizedBox(height: 8),
           Row(

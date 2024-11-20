@@ -1,7 +1,8 @@
-import 'package:currency_exchanger/core/theme/colors.dart';
-import 'package:currency_exchanger/core/theme/text_styles.dart';
+import 'package:currency_exchanger/core/res/colors.dart';
+import 'package:currency_exchanger/core/res/text_styles.dart';
 import 'package:currency_exchanger/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CurrencyTextField extends StatefulWidget {
   const CurrencyTextField({
@@ -49,6 +50,8 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
         onTapOutside: (_) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
+        maxLength: 3,
+        maxLengthEnforcement: MaxLengthEnforcement.enforced,
         cursorColor: AppColors.branded,
         focusNode: _focusNode,
         controller: widget.currencyController,
@@ -57,6 +60,7 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
             borderSide: BorderSide(color: AppColors.neutralGrey02),
           ),
           labelText: AppStrings.currencyCode,
+          counterText: '',
           labelStyle: AppTextStyles.inputLabel.copyWith(
             color: _isFocused ? AppColors.branded : AppColors.neutralDark,
           ),

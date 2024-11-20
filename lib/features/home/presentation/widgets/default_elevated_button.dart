@@ -1,5 +1,5 @@
-import 'package:currency_exchanger/core/theme/colors.dart';
-import 'package:currency_exchanger/core/theme/text_styles.dart';
+import 'package:currency_exchanger/core/res/colors.dart';
+import 'package:currency_exchanger/core/res/text_styles.dart';
 import 'package:currency_exchanger/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class DefaultElevatedButton extends StatelessWidget {
       width: double.infinity,
       height: 48,
       child: ElevatedButton(
-        onPressed: onPressedButton,
+        onPressed: currencyController.text.isNotEmpty ? onPressedButton : () {},
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.branded,
           splashFactory: NoSplash.splashFactory,
@@ -30,6 +30,7 @@ class DefaultElevatedButton extends StatelessWidget {
         child: Text(
           AppStrings.exchangeResult,
           style: AppTextStyles.buttonLarge.copyWith(
+            fontWeight: FontWeight.bold,
             fontSize: 16,
             color: Colors.white,
           ),

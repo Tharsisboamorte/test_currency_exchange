@@ -8,6 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:sealed_currencies/sealed_currencies.dart';
 
 part 'home_state.dart';
 
@@ -79,5 +80,15 @@ class HomeCubit extends Cubit<HomeState> {
   String formatCurrentCurrency(double value) {
     final formatter = NumberFormat('#,##0.00', 'pt_BR');
     return formatter.format(value);
+  }
+
+  bool isCurrencyValid(String input) {
+    final exists = FiatCurrency.list.any(
+      (currency) => currency.code == input.toUpperCase(),
+    );
+    if (exists == false) {
+      emit(const ErrorState('Invalid currency code.'));
+    }
+    return exists;
   }
 }
