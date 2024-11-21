@@ -19,7 +19,6 @@ Um aplicativo Flutter projetado para converter Reais (BRL) para qualquer moeda i
 - **sealed_currencies**: para validação de moedas.
 - **Dio**: para requisições HTTP e obtenção de taxas de câmbio.
 - **intl**: para formatação de datas e números.
-- **Clean Architecture**: para garantir modularidade e escalabilidade.
 
 
 [![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
