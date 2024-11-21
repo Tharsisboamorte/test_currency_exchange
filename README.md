@@ -15,13 +15,13 @@ Um aplicativo Flutter projetado para converter Reais (BRL) para qualquer moeda i
 ---
 
 ## **Tecnologias Utilizadas**
-- **Flutter Framework** para desenvolvimento multiplataforma.
-- **Dart** para implementação da lógica de negócios.
-- **flutter_bloc** para gerenciamento de estado (arquitetura Cubit/Bloc).
-- **sealed_currencies** para validação de moedas.
-- **Dio** para requisições HTTP e obtenção de taxas de câmbio.
-- **intl** para formatação de datas e números.
-- **Clean Architecture** para garantir modularidade e escalabilidade.
+- **Flutter Framework**: para desenvolvimento multiplataforma.
+- **Dart**: para implementação da lógica de negócios.
+- **flutter_bloc**: para gerenciamento de estado (arquitetura Cubit/Bloc).
+- **sealed_currencies**: para validação de moedas.
+- **Dio**: para requisições HTTP e obtenção de taxas de câmbio.
+- **intl**: para formatação de datas e números.
+- **Clean Architecture**: para garantir modularidade e escalabilidade.
 
 
 [![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
