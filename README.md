@@ -1,19 +1,27 @@
-# currency_exchanger
+### **Aplicativo de Taxa de Câmbio BRL**
 
-Project to exchange BRL to a user inputed currency.
+Um aplicativo Flutter projetado para converter Reais (BRL) para qualquer moeda inserida pelo usuário, garantindo taxas de câmbio precisas e exibição de dados históricos. O aplicativo segue os princípios de **Clean Architecture**, proporcionando um código escalável e de fácil manutenção.
+
+---
+
+## **Funcionalidades**
+- Converter BRL para qualquer moeda válida inserida pelo usuário.
+- Validar códigos de moedas dinamicamente usando a biblioteca `sealed_currencies`.
+- Exibir taxas de câmbio atuais em tempo real.
+- Mostrar taxas de câmbio históricas dos últimos 30 dias em um widget expansível.
+- UI intuitiva e responsiva com animações dinâmicas.
+- Tratamento de erros para entradas inválidas e problemas de rede.
+
+---
+
+## **Tecnologias Utilizadas**
+- **Flutter Framework** para desenvolvimento multiplataforma.
+- **Dart** para implementação da lógica de negócios.
+- **flutter_bloc** para gerenciamento de estado (arquitetura Cubit/Bloc).
+- **sealed_currencies** para validação de moedas.
+- **Dio** para requisições HTTP e obtenção de taxas de câmbio.
+- **intl** para formatação de datas e números.
+- **Clean Architecture** para garantir modularidade e escalabilidade.
+
 
 [![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
-
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
