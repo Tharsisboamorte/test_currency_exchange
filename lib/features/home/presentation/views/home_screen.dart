@@ -1,5 +1,7 @@
 import 'package:currency_exchanger/core/extension/context_extension.dart';
 import 'package:currency_exchanger/core/res/colors.dart';
+import 'package:currency_exchanger/core/res/text_styles.dart';
+import 'package:currency_exchanger/core/utils/app_strings.dart';
 import 'package:currency_exchanger/features/home/presentation/cubit/home_cubit.dart';
 import 'package:currency_exchanger/features/home/presentation/widgets/app_title_view.dart';
 import 'package:currency_exchanger/features/home/presentation/widgets/currency_text_field.dart';
@@ -23,55 +25,93 @@ class _HomeScreenState extends State<HomeScreen> {
       listener: (context, state) {
         if (state is ErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
+            SnackBar(
+              content: Text(state.message),
+              duration: Durations.short2,
+            ),
           );
         }
       },
       builder: (context, state) {
         return Scaffold(
           backgroundColor: Colors.white,
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Column(
-                children: <Widget>[
-                  const AppTitleView(),
-                  SizedBox(height: context.height * .030),
-                  CurrencyTextField(
-                    currencyController: cubit.currencyTextController,
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight:
+                        constraints.maxHeight,
                   ),
-                  SizedBox(height: context.height * .032),
-                  DefaultElevatedButton(
-                    currencyController: cubit.currencyTextController,
-                    onPressedButton: () {
-                      final isCurrencyValid = context
-                          .read<HomeCubit>()
-                          .isCurrencyValid(cubit.currencyTextController.text);
-
-                      if (isCurrencyValid == true) {
-                        cubit.getCurrencyExchange(
-                          cubit.currencyTextController.text.toUpperCase(),
-                        );
-                      }
-                    },
-                  ),
-                  if (state is CurrencyDataLoaded)
-                    ExchangeRatesView(
-                      currentExchangeData: state.currentExchange,
-                      dailyExchangeData: state.dailyExchanges,
-                    )
-                  else
-                    state is GettingCurrencyData
-                        ? const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: CircularProgressIndicator(
-                              color: AppColors.branded,
+                  child: IntrinsicHeight(
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 16,
                             ),
-                          )
-                        : const SizedBox(),
-                ],
-              ),
-            ),
+                            child: Column(
+                              children: <Widget>[
+                                const AppTitleView(),
+                                SizedBox(height: context.height * .030),
+                                CurrencyTextField(
+                                  currencyController:
+                                      cubit.currencyTextController,
+                                ),
+                                SizedBox(height: context.height * .032),
+                                DefaultElevatedButton(
+                                  currencyController:
+                                      cubit.currencyTextController,
+                                  onPressedButton: () {
+                                    final isCurrencyValid = context
+                                        .read<HomeCubit>()
+                                        .isCurrencyValid(
+                                          cubit.currencyTextController.text,
+                                        );
+
+                                    if (isCurrencyValid == true) {
+                                      cubit.getCurrencyExchange(
+                                        cubit.currencyTextController.text
+                                            .toUpperCase(),
+                                      );
+                                    }
+                                  },
+                                ),
+                                if (state is CurrencyDataLoaded)
+                                  ExchangeRatesView(
+                                    currentExchangeData: state.currentExchange,
+                                    dailyExchangeData: state.dailyExchanges,
+                                  )
+                                else if (state is GettingCurrencyData)
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    child: CircularProgressIndicator(
+                                      color: AppColors.branded,
+                                    ),
+                                  )
+                                else
+                                  const SizedBox(),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: context.height * .035,
+                          color: AppColors.branded,
+                          alignment: Alignment.center,
+                          child: const Text(
+                            AppStrings.copyRights,
+                            style: AppTextStyles.tablePagination,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         );
       },

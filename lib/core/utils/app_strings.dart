@@ -8,5 +8,6 @@ class AppStrings {
   static const String appTitle = 'BRL EXCHANGE RATE';
   static const String exchangeResult = 'EXCHANGE RESULT';
   static const String currencyCode = 'Enter the currency code';
+  static const String copyRights = 'Copyright 2022 - Action Labs';
   static const String exchangeRateNow = 'Exchange rate now';
 }

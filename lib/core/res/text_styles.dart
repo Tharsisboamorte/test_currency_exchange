@@ -52,6 +52,14 @@ class AppTextStyles {
     textBaseline: TextBaseline.alphabetic,
   );
 
+  static const TextStyle tablePagination = TextStyle(
+    fontFamily: Fonts.roboto,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: Colors.white,
+    height: 22 / 14,
+  );
+
   static const TextStyle titleAdminH1 = TextStyle(
     fontFamily: Fonts.roboto,
     fontSize: 24,

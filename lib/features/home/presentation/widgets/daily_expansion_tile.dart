@@ -2,7 +2,6 @@ import 'package:currency_exchanger/core/extension/context_extension.dart';
 import 'package:currency_exchanger/core/res/colors.dart';
 import 'package:currency_exchanger/core/res/text_styles.dart';
 import 'package:currency_exchanger/core/utils/app_strings.dart';
-import 'package:currency_exchanger/core/utils/logger.dart';
 import 'package:currency_exchanger/features/home/domain/entities/daily_exchange.dart';
 import 'package:currency_exchanger/features/home/presentation/cubit/home_cubit.dart';
 import 'package:currency_exchanger/features/home/presentation/widgets/daily_exchange_card.dart';
@@ -95,14 +94,13 @@ class _DailyExchangeExpansionTileState extends State<DailyExchangeExpansionTile>
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 700),
                   curve: Curves.easeInOut,
-                  height: _isExpanded ? context.height * 5.45 : 0,
+                  height: _isExpanded ? context.height * 5.87 : 0,
                   color: Colors.grey.withOpacity(0.1),
                   child: _isExpanded
                       ? ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: dailyExchangeData.length,
                           itemBuilder: (BuildContext context, int index) {
-                            logger.i(dailyExchangeData.length);
                             final indexedDailyData = dailyExchangeData[index];
 
                             return DailyExchangeCard(

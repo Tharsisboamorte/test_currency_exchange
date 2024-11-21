@@ -1,4 +1,3 @@
-import 'package:currency_exchanger/core/utils/logger.dart';
 import 'package:currency_exchanger/features/home/domain/entities/current_exchange.dart';
 import 'package:currency_exchanger/features/home/domain/entities/daily_exchange.dart';
 import 'package:currency_exchanger/features/home/domain/entities/data.dart';
@@ -33,10 +32,10 @@ class HomeCubit extends Cubit<HomeState> {
 
     currentExchangeResult.fold(
       (currentExchange) {
-        logger.i(currentExchange);
+        // logger.i(currentExchange); Logger is for debugging only
         dailyExchangeResult.fold(
           (dailyExchange) {
-            logger.i(dailyExchange);
+            // logger.i(dailyExchange);
             emit(
               CurrencyDataLoaded(
                 dailyExchange as DailyExchange,
