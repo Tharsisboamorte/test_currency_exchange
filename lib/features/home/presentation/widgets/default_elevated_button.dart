@@ -19,7 +19,7 @@ class DefaultElevatedButton extends StatelessWidget {
       width: double.infinity,
       height: 48,
       child: ElevatedButton(
-        onPressed: currencyController.text.isNotEmpty ? onPressedButton : () {},
+        onPressed: onPressedButton,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.branded,
           splashFactory: NoSplash.splashFactory,
