@@ -1,4 +1,3 @@
-import 'package:currency_exchanger/core/extension/context_extension.dart';
 import 'package:currency_exchanger/core/res/colors.dart';
 import 'package:currency_exchanger/core/res/text_styles.dart';
 import 'package:currency_exchanger/core/utils/app_strings.dart';
@@ -93,8 +92,8 @@ class _DailyExchangeExpansionTileState extends State<DailyExchangeExpansionTile>
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 700),
+                  height: _isExpanded ? 30 * 117.0 : 0,
                   curve: Curves.easeInOut,
-                  height: _isExpanded ? context.height * 5.87 : 0,
                   color: Colors.grey.withOpacity(0.1),
                   child: _isExpanded
                       ? ListView.builder(
